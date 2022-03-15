@@ -28,7 +28,13 @@ const verifyCache = (req, res, next) => {
   }
 };
 
-app.get('/:id', verifyCache, async (req, res) => {
+app.get('/', (req, res) => {
+  return res.status(200).json({
+    message: 'Welcome to the API',
+  });
+});
+
+app.get('/Content/:id', verifyCache, async (req, res) => {
   try {
     const { id } = req.params;
     const { data } = await axios.get(`${API_URL}/values/${id}?key=${API_KEY}`);
